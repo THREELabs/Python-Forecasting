@@ -62,7 +62,7 @@ figure.update_layout(title = "Price Action Overview",
                      xaxis_rangeslider_visible=False)
 figure.show()
 
-correlation = data.corr()
+correlation = data.corr(numeric_only=True)
 print(correlation["Close"].sort_values(ascending=False))
 
 #!pip install autots if on Colab, skip if already installed on server.
