@@ -1,13 +1,14 @@
 #import libraries
 import pandas as pd
 import yfinance as yf
+from autots import AutoTS
 
 import datetime
 from datetime import date, timedelta
 today = date.today()
 
 #user input
-security = input("Which security? ")
+security = input("Enter symbol ")
 
 #confirmation
 print(f"Selected {security}")
@@ -46,12 +47,9 @@ figure.show()
 correlation = data.corr(numeric_only=True)
 print(correlation["Close"].sort_values(ascending=False))
 
-#import AutoTs for time series analysis. !pip install autots if on Colab
-from autots import AutoTS
-
 model = AutoTS(forecast_length=14, frequency='infer', ensemble='simple')
 model = model.fit(data, date_col='Date', value_col='Close', id_col=None)
 prediction = model.predict()
 forecast = prediction.forecast
 print(forecast)
-print("Are the results for:", security)
+print("Forecast:", security)
